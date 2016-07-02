@@ -84,17 +84,17 @@ void MainWindow::runOnDevice(){
          printf("Failed\n");
 
       } else {
- printf("mudo\n");
-//  system(cmd);
+// printf("mudo\n");
+  system(cmd);
 //   system("");
-   std::string result = "";
-       std::shared_ptr<FILE> pipe(popen("echo $ANDROID_HOME", "r"), pclose);
-       if (!pipe) throw std::runtime_error("popen() failed!");
-       while (!feof(pipe.get())) {
-           if (fgets(buffer, 128, pipe.get()) != NULL)
-               result += buffer;
-       }
-  std::cout << result << std::endl;
+//   std::string result = "";
+//       std::shared_ptr<FILE> pipe(popen("echo $ANDROID_HOME", "r"), pclose);
+//       if (!pipe) throw std::runtime_error("popen() failed!");
+//       while (!feof(pipe.get())) {
+//           if (fgets(buffer, 128, pipe.get()) != NULL)
+//               result += buffer;
+//       }
+//  std::cout << result << std::endl;
     }
 
 }
