@@ -3,7 +3,13 @@
 ### This project is under GNU GPLv3 license ###
 
 
+Dependencies
+------------
 Build in C++ with QT for UI
+
+* QT4 or above
+* g++ 4.4
+* gcc 4.4
 
 
 How to Use
@@ -18,10 +24,3 @@ Missing - Problems to Solve - Improviments
 * Show Output 
 * Change the SDK path to using $ANDROID_HOME set at OS
 * 
-
-
-
-Contact 
-----------
-* email: saneschio@gmail.com
-* page: codersquirrel.github.io
