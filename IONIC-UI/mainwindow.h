@@ -18,6 +18,7 @@ public:
 public slots:
    void choosePath();
    void runOnDevice();
+   void chooseSDK();
 
 private:
     Ui::MainWindow *ui;

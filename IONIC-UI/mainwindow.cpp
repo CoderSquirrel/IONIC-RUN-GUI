@@ -12,6 +12,7 @@
 int OS=0;
 std::string slash = "/";
 std::string PROJECT_PATH = "";
+std::string SDK_PATH = "";
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -27,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->BT_PATH, SIGNAL(clicked(bool)), SLOT(choosePath()));
     connect(ui->BT_RUN, SIGNAL(clicked(bool)), SLOT(runOnDevice()));
+    connect(ui->BT_SDK, SIGNAL(clicked(bool)), SLOT(chooseSDK()));
 
 }
 void MainWindow::choosePath(){
@@ -65,13 +67,22 @@ void MainWindow::choosePath(){
 
 }
 
+void MainWindow::chooseSDK(){
+    QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
+                                                    (OS==1?"C://":"/home"),
+                                                    QFileDialog::ShowDirsOnly
+                                                    | QFileDialog::DontResolveSymlinks);
+    std::cout << dir.toStdString() << std::endl;
+    SDK_PATH = dir.toStdString();
+    ui->lblSDK->setText(dir);
+}
 
 void MainWindow::runOnDevice(){
     std::cout << "running" <<std::endl;
 
   std::string platform =  ui->CB_PLATFORMS->currentText().toStdString().c_str();
-  std::string exportPath = "export ANDROID_HOME=/home/schirrel/Downloads/android-sdk-linux";
-   std::string wholecmd = " ionic run "+platform+" --device";
+  std::string SDK_PATH = "export ANDROID_HOME=/home/schirrel/Downloads/android-sdk-linux";
+   std::string wholecmd = SDK_PATH+" && ionic run "+platform+" --device";
    char* cmd = const_cast<char*> ( wholecmd.c_str());
    char buffer[128];
 
@@ -84,9 +95,9 @@ void MainWindow::runOnDevice(){
          printf("Failed\n");
 
       } else {
-// printf("mudo\n");
+ printf("mudo\n");
   system(cmd);
-//   system("");
+//   system("export ANDROID_HOME=/home/schirrel/Downloads/android-sdk-linux && echo $ANDROID_HOME > file.txt && ");
 //   std::string result = "";
 //       std::shared_ptr<FILE> pipe(popen("echo $ANDROID_HOME", "r"), pclose);
 //       if (!pipe) throw std::runtime_error("popen() failed!");
