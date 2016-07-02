@@ -71,7 +71,7 @@ void MainWindow::runOnDevice(){
 
   std::string platform =  ui->CB_PLATFORMS->currentText().toStdString().c_str();
   std::string exportPath = "export ANDROID_HOME=/home/schirrel/Downloads/android-sdk-linux";
-   std::string wholecmd = exportPath+" & ionic run "+platform+" --device";
+   std::string wholecmd = " ionic run "+platform+" --device";
    char* cmd = const_cast<char*> ( wholecmd.c_str());
    char buffer[128];
 
