@@ -23,5 +23,5 @@ Missing - Problems to Solve - Improviments
 
 Contact 
 ----------
-email: saneschio@gmail.com
-page: codersquirrel.github.io
+* email: saneschio@gmail.com
+* page: codersquirrel.github.io
