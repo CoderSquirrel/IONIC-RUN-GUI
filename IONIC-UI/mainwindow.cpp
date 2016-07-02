@@ -70,19 +70,13 @@ void MainWindow::runOnDevice(){
     std::cout << "running" <<std::endl;
 
   std::string platform =  ui->CB_PLATFORMS->currentText().toStdString().c_str();
-   std::string wholecmd = " ionic run "+platform+" --device";
+  std::string exportPath = "export ANDROID_HOME=/home/schirrel/Downloads/android-sdk-linux";
+   std::string wholecmd = exportPath+" & ionic run "+platform+" --device";
    char* cmd = const_cast<char*> ( wholecmd.c_str());
-  /* char buffer[128];
+   char buffer[128];
 
- std::string result = "";
-     std::shared_ptr<FILE> pipe(popen(cmd, "r"), pclose);
-     if (!pipe) throw std::runtime_error("popen() failed!");
-     while (!feof(pipe.get())) {
-         if (fgets(buffer, 128, pipe.get()) != NULL)
-             result += buffer;
-     }
-std::cout << result << std::endl;
-*/
+
+
  //  system( "cd \Users & dir" )
  //   system(cmd);
     if(chdir(const_cast<char*> (PROJECT_PATH.c_str())) < 0 )
@@ -91,7 +85,16 @@ std::cout << result << std::endl;
 
       } else {
  printf("mudo\n");
-  system(cmd);
+//  system(cmd);
+//   system("");
+   std::string result = "";
+       std::shared_ptr<FILE> pipe(popen("echo $ANDROID_HOME", "r"), pclose);
+       if (!pipe) throw std::runtime_error("popen() failed!");
+       while (!feof(pipe.get())) {
+           if (fgets(buffer, 128, pipe.get()) != NULL)
+               result += buffer;
+       }
+  std::cout << result << std::endl;
     }
 
 }
