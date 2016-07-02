@@ -1,9 +1,10 @@
 # Ionic Tool to run app at mobile devices #
 
+### This project is under GNU GPLv3 license ###
 
-## Build in C++ with QT for UI ##
 
-This project is under GNU GPLv3 license
+Build in C++ with QT for UI
+
 
 How to Use
 ------------
