@@ -18,3 +18,8 @@ SOURCES += main.cpp\
 HEADERS  += mainwindow.h
 
 FORMS    += mainwindow.ui
+
+RC_FILE = myapp.rc
+
+RESOURCES += \
+    icon.qrc

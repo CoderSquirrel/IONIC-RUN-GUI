@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+setWindowIcon(QIcon(":/icons/logo.ico"));
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
     slash="\\";
     OS = 0;
@@ -77,36 +78,38 @@ void MainWindow::chooseSDK(){
     ui->lblSDK->setText(dir);
 }
 
-void MainWindow::runOnDevice(){
-    std::cout << "running" <<std::endl;
 
-  std::string platform =  ui->CB_PLATFORMS->currentText().toStdString().c_str();
-  std::string SDK_PATH = "export ANDROID_HOME=/home/schirrel/Downloads/android-sdk-linux";
-   std::string wholecmd = SDK_PATH+" && ionic run "+platform+" --device";
-   char* cmd = const_cast<char*> ( wholecmd.c_str());
-   char buffer[128];
-
+bool MainWindow::systemMethod(){
+    std::string platform =  ui->CB_PLATFORMS->currentText().toStdString().c_str();
+    std::string SDK_PATH = "export ANDROID_HOME=/home/schirrel/Downloads/android-sdk-linux";
+    std::string wholecmd = SDK_PATH+" && ionic run "+platform+" --device";
+    char* cmd = const_cast<char*> ( wholecmd.c_str());
+    char buffer[128];
 
 
- //  system( "cd \Users & dir" )
- //   system(cmd);
+
+    //  system( "cd \Users & dir" )
+
     if(chdir(const_cast<char*> (PROJECT_PATH.c_str())) < 0 )
-      {
-         printf("Failed\n");
+    {
+        printf("Failed\n");
+        return false;
+    } else {
+        system(cmd);
 
-      } else {
- printf("mudo\n");
-  system(cmd);
-//   system("export ANDROID_HOME=/home/schirrel/Downloads/android-sdk-linux && echo $ANDROID_HOME > file.txt && ");
-//   std::string result = "";
-//       std::shared_ptr<FILE> pipe(popen("echo $ANDROID_HOME", "r"), pclose);
-//       if (!pipe) throw std::runtime_error("popen() failed!");
-//       while (!feof(pipe.get())) {
-//           if (fgets(buffer, 128, pipe.get()) != NULL)
-//               result += buffer;
-//       }
-//  std::cout << result << std::endl;
+        return true;
+
     }
+}
+
+void MainWindow::runOnDevice(){
+    ui->BT_RUN->setEnabled(false);
+    ui->lblOutput->setText("Running...");
+    if(systemMethod()){
+        ui->lblOutput->setText("Finished...");
+    }
+    ui->BT_RUN->setEnabled(true);
+
 
 }
 

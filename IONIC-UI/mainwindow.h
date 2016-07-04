@@ -20,6 +20,7 @@ public slots:
    void runOnDevice();
    void chooseSDK();
 
+   bool systemMethod();
 private:
     Ui::MainWindow *ui;
 };
