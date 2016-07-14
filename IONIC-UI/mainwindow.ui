@@ -204,18 +204,56 @@
       <string>Output</string>
      </property>
     </widget>
-    <widget class="QLabel" name="lblOutput">
+    <widget class="QScrollArea" name="SCROLL">
      <property name="geometry">
       <rect>
-       <x>10</x>
+       <x>50</x>
        <y>40</y>
-       <width>551</width>
-       <height>121</height>
+       <width>481</width>
+       <height>141</height>
       </rect>
      </property>
-     <property name="text">
-      <string>TextLabel</string>
+     <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOn</enum>
      </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOn</enum>
+     </property>
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>466</width>
+        <height>126</height>
+       </rect>
+      </property>
+      <widget class="QLabel" name="lblOutput">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>10</y>
+         <width>551</width>
+         <height>121</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </widget>
     </widget>
    </widget>
   </widget>

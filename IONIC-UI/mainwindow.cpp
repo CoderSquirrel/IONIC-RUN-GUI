@@ -33,7 +33,7 @@ setWindowIcon(QIcon(":/icons/logo.ico"));
 
 }
 void MainWindow::choosePath(){
-    QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
+    QString dir = QFileDialog::getExistingDirectory(this, tr("Open Project Directory"),
                                                     (OS==1?"C://":"/home"),
                                                     QFileDialog::ShowDirsOnly
                                                     | QFileDialog::DontResolveSymlinks);
@@ -69,7 +69,7 @@ void MainWindow::choosePath(){
 }
 
 void MainWindow::chooseSDK(){
-    QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
+    QString dir = QFileDialog::getExistingDirectory(this, tr("Open SDK Directory"),
                                                     (OS==1?"C://":"/home"),
                                                     QFileDialog::ShowDirsOnly
                                                     | QFileDialog::DontResolveSymlinks);
@@ -95,7 +95,29 @@ bool MainWindow::systemMethod(){
         printf("Failed\n");
         return false;
     } else {
-        system(cmd);
+       // system(cmd);
+
+        FILE *fp;
+        char path[1035];
+
+        /* Open the command for reading. */
+        fp = popen(cmd, "r");
+        if (fp == NULL) {
+          printf("Failed to run command\n" );
+          exit(1);
+        }
+       /* Read the output a line at a time - output it. */
+        while (fgets(path, sizeof(path)-1, fp) != NULL) {
+        //  printf("%s", path);
+          ui->lblOutput->setText(ui->lblOutput->text()+" "+ path);
+
+        }
+
+        /* close */
+        pclose(fp);
+
+
+
 
         return true;
 
@@ -104,9 +126,9 @@ bool MainWindow::systemMethod(){
 
 void MainWindow::runOnDevice(){
     ui->BT_RUN->setEnabled(false);
-    ui->lblOutput->setText("Running...");
+   // ui->lblOutput->setText("Running...");
     if(systemMethod()){
-        ui->lblOutput->setText("Finished...");
+//        ui->lblOutput->setText("Finished...");
     }
     ui->BT_RUN->setEnabled(true);
 
